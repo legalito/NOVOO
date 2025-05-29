@@ -1,0 +1,91 @@
+[
+    {
+      "name": "Développé couché",
+      "category": "musculation",
+      "muscles": ["pectoraux", "triceps", "épaules"],
+      "equipment": "barre",
+      "image_url": "https://example.com/developpe-couche.jpg",
+      "video_url": "https://example.com/developpe-couche.mp4"
+    },
+    {
+      "name": "Squat",
+      "category": "musculation",
+      "muscles": ["quadriceps", "ischios", "fessiers"],
+      "equipment": "barre",
+      "image_url": "https://example.com/squat.jpg",
+      "video_url": "https://example.com/squat.mp4"
+    },
+    {
+      "name": "Tractions",
+      "category": "musculation",
+      "muscles": ["dorsaux", "biceps", "épaules"],
+      "equipment": "barre de traction",
+      "image_url": "https://example.com/tractions.jpg",
+      "video_url": "https://example.com/tractions.mp4"
+    },
+    {
+      "name": "Curl biceps haltères",
+      "category": "musculation",
+      "muscles": ["biceps"],
+      "equipment": "haltères",
+      "image_url": "https://example.com/curl-biceps.jpg",
+      "video_url": "https://example.com/curl-biceps.mp4"
+    },
+    {
+      "name": "Soulevé de terre",
+      "category": "musculation",
+      "muscles": ["dos", "ischios", "fessiers"],
+      "equipment": "barre",
+      "image_url": "https://example.com/souleve-terre.jpg",
+      "video_url": "https://example.com/souleve-terre.mp4"
+    },
+    {
+      "name": "Fentes avec haltères",
+      "category": "musculation",
+      "muscles": ["quadriceps", "fessiers", "ischios"],
+      "equipment": "haltères",
+      "image_url": "https://example.com/fentes.jpg",
+      "video_url": "https://example.com/fentes.mp4"
+    },
+    {
+      "name": "Pompes",
+      "category": "musculation",
+      "muscles": ["pectoraux", "triceps", "épaules"],
+      "equipment": "aucun",
+      "image_url": "https://example.com/pompes.jpg",
+      "video_url": "https://example.com/pompes.mp4"
+    },
+    {
+      "name": "Dips",
+      "category": "musculation",
+      "muscles": ["triceps", "pectoraux", "épaules"],
+      "equipment": "barres parallèles",
+      "image_url": "https://example.com/dips.jpg",
+      "video_url": "https://example.com/dips.mp4"
+    },
+    {
+      "name": "Extensions mollets debout",
+      "category": "musculation",
+      "muscles": ["mollets"],
+      "equipment": "machine",
+      "image_url": "https://example.com/extensions-mollets.jpg",
+      "video_url": "https://example.com/extensions-mollets.mp4"
+    },
+    {
+      "name": "Rowing barre",
+      "category": "musculation",
+      "muscles": ["dorsaux", "biceps", "épaules"],
+      "equipment": "barre",
+      "image_url": "https://example.com/rowing-barre.jpg",
+      "video_url": "https://example.com/rowing-barre.mp4"
+    },
+    {
+      "name": "Développé militaire",
+      "category": "musculation",
+      "muscles": ["épaules", "triceps"],
+      "equipment": "barre",
+      "image_url": "https://example.com/developpe-militaire.jpg",
+      "video_url": "https://example.com/developpe-militaire.mp4"
+    }
+  ]
+  
