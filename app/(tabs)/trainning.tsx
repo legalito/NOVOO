@@ -6,6 +6,8 @@ import { router } from 'expo-router';
 import { getUserWorkouts } from '../../service/workoutService';
 import { Exercise } from '../../components/WorkoutCalendar/add-exercise';
 import { useFocusEffect } from '@react-navigation/native';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 // Définition de l'interface Workout
 interface Workout {
@@ -18,6 +20,8 @@ interface Workout {
 }
 
 export default function TrainningScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const days = ['L', 'M', 'Mer', 'J', 'V', 'S', 'D'];
   const currentWeek = [3, 4, 5, 6, 7, 8, 9];
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -57,12 +61,12 @@ export default function TrainningScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedText style={styles.title}>Mes séances</ThemedText>
       <ThemedText style={styles.subtitle}>Commence un entrainement</ThemedText>
 
       {/* Calendar Section */}
-      <View style={styles.calendarContainer}>
+      <View style={[styles.calendarContainer, { backgroundColor: colors.secondary }]}>
         <ThemedText style={styles.sectionTitle}>Workouts</ThemedText>
         <View style={styles.daysRow}>
           {days.map((day, index) => (
@@ -71,7 +75,7 @@ export default function TrainningScreen() {
               <View style={[
                 styles.dateCircle,
                 currentWeek[index] === 3 || currentWeek[index] === 4 || currentWeek[index] === 5 || currentWeek[index] === 8
-                  ? styles.completedDate : styles.inactiveDate
+                  ? { backgroundColor: colors.primary } : { backgroundColor: colors.accent }
               ]}>
                 <ThemedText style={styles.dateText}>{currentWeek[index]}</ThemedText>
               </View>
@@ -84,14 +88,14 @@ export default function TrainningScreen() {
       <ScrollView style={styles.workoutsList}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#007AFF" />
+            <ActivityIndicator size="large" color={colors.primary} />
             <ThemedText style={styles.loadingText}>Chargement des séances...</ThemedText>
           </View>
         ) : workouts.length > 0 ? (
           workouts.map((workout) => (
             <TouchableOpacity 
               key={workout.id}
-              style={styles.workoutCard}
+              style={[styles.workoutCard, { backgroundColor: colors.secondary }]}
               onPress={() => router.push(`/(workouts)/${workout.id}`)}
             >
               <View>
@@ -107,10 +111,10 @@ export default function TrainningScreen() {
                 </View>
               </View>
               <TouchableOpacity 
-                style={styles.playButton}
+                style={[styles.playButton, { backgroundColor: colors.primary }]}
                 onPress={() => router.push(`/(workouts)/start?id=${workout.id}`)}
               >
-                <ThemedText>▶</ThemedText>
+                <ThemedText style={{ color: colors.secondary }}>▶</ThemedText>
               </TouchableOpacity>
             </TouchableOpacity>
           ))
@@ -124,10 +128,10 @@ export default function TrainningScreen() {
 
       {/* Add Workout Button */}
       <TouchableOpacity 
-        style={styles.addButton}
+        style={[styles.addButton, { backgroundColor: colors.primary }]}
         onPress={() => router.push('/(workouts)/create')}
       >
-        <ThemedText style={styles.addButtonText}>+ Créer une séance</ThemedText>
+        <ThemedText style={[styles.addButtonText, { color: colors.secondary }]}>+ Créer une séance</ThemedText>
       </TouchableOpacity>
     </ThemedView>
   );
@@ -150,7 +154,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   calendarContainer: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 20,
     padding: 16,
     marginBottom: 24,
@@ -178,12 +181,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  completedDate: {
-    backgroundColor: '#007AFF',
-  },
-  inactiveDate: {
-    backgroundColor: '#E0E0E0',
-  },
   dateText: {
     color: 'white',
     fontSize: 16,
@@ -192,7 +189,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   workoutCard: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 20,
     padding: 16,
     marginBottom: 16,
@@ -222,19 +218,16 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#007AFF',
     justifyContent: 'center',
     alignItems: 'center',
   },
   addButton: {
-    backgroundColor: '#007AFF',
     borderRadius: 20,
     padding: 16,
     alignItems: 'center',
     marginTop: 16,
   },
   addButtonText: {
-    color: 'white',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -249,8 +242,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   emptyContainer: {
-    padding: 20,
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
   },
   emptyText: {
     fontSize: 18,
@@ -258,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   emptySubtext: {
-    fontSize: 14,
+    fontSize: 16,
     opacity: 0.7,
   },
 });

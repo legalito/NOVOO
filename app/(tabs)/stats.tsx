@@ -3,6 +3,8 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 type StatCardProps = {
   title: string;
@@ -10,23 +12,30 @@ type StatCardProps = {
   unit?: string;
 };
 
-const StatCard = ({ title, value, unit }: StatCardProps) => (
-  <View style={styles.statCard}>
-    <ThemedText style={styles.statTitle}>{title}</ThemedText>
-    <View style={styles.statValueContainer}>
-      <ThemedText style={styles.statValue}>{value}</ThemedText>
-      {unit && <ThemedText style={styles.statUnit}>{unit}</ThemedText>}
+const StatCard = ({ title, value, unit }: StatCardProps) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+
+  return (
+    <View style={[styles.statCard, { backgroundColor: colors.secondary }]}>
+      <ThemedText style={styles.statTitle}>{title}</ThemedText>
+      <View style={styles.statValueContainer}>
+        <ThemedText style={styles.statValue}>{value}</ThemedText>
+        {unit && <ThemedText style={styles.statUnit}>{unit}</ThemedText>}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export default function StatsScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const currentDate = new Date();
   const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedText style={styles.title}>Statistiques</ThemedText>
 
       <ScrollView style={styles.content}>
@@ -67,9 +76,9 @@ export default function StatsScreen() {
         </View>
 
         {/* Workouts Section */}
-        <View style={styles.workoutsSection}>
+        <View style={[styles.workoutsSection, { backgroundColor: colors.secondary }]}>
           <View style={styles.workoutsHeader}>
-            <IconSymbol name="calendar" size={24} color="#000" />
+            <IconSymbol name="calendar" size={24} color={colors.primary} />
             <ThemedText style={styles.workoutsTitle}>Workouts</ThemedText>
           </View>
           <ThemedText style={styles.workoutsSubtitle}>Goal → 4 workouts/week</ThemedText>
@@ -78,7 +87,10 @@ export default function StatsScreen() {
           <View style={styles.progressBars}>
             {[4, 3, 2, 3, 2, 1].map((value, index) => (
               <View key={index} style={styles.progressBarContainer}>
-                <View style={[styles.progressBar, { height: `${(value / 4) * 100}%` }]} />
+                <View style={[styles.progressBar, { 
+                  height: `${(value / 4) * 100}%`,
+                  backgroundColor: colors.primary 
+                }]} />
                 <ThemedText style={styles.progressBarLabel}>février</ThemedText>
               </View>
             ))}
@@ -86,10 +98,10 @@ export default function StatsScreen() {
         </View>
 
         {/* Nutrition Section */}
-        <View style={styles.nutritionSection}>
+        <View style={[styles.nutritionSection, { backgroundColor: colors.secondary }]}>
           <View style={styles.nutritionHeader}>
             <ThemedText style={styles.nutritionTitle}>What I eat</ThemedText>
-            <ThemedText style={styles.seeAllText}>see all</ThemedText>
+            <ThemedText style={[styles.seeAllText, { color: colors.primary }]}>see all</ThemedText>
           </View>
           
           <View style={styles.nutritionStats}>
@@ -168,7 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   statCard: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 16,
     padding: 16,
     width: '48%',
@@ -191,7 +202,6 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   workoutsSection: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 16,
     padding: 16,
     marginBottom: 24,
@@ -223,7 +233,6 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     width: '100%',
-    backgroundColor: '#007AFF',
     borderRadius: 4,
     marginBottom: 8,
   },
@@ -232,7 +241,6 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   nutritionSection: {
-    backgroundColor: '#F5F5F5',
     borderRadius: 16,
     padding: 16,
   },
@@ -248,25 +256,26 @@ const styles = StyleSheet.create({
   },
   seeAllText: {
     fontSize: 14,
-    color: '#007AFF',
   },
   nutritionStats: {
-    gap: 16,
-  },
-  nutritionStat: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  nutritionStat: {
     alignItems: 'center',
   },
   nutritionLabel: {
-    fontSize: 16,
+    fontSize: 14,
+    opacity: 0.7,
+    marginBottom: 4,
   },
   nutritionValue: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   nutritionUnit: {
-    fontSize: 14,
+    fontSize: 12,
     opacity: 0.7,
+    marginLeft: 2,
   },
 }); 

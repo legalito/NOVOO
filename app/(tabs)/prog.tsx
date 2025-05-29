@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import { useEffect } from 'react';
 import { getQuickStats } from '@/service/homeService'; // Hypothetical service to fetch quick stats
 import { useState } from 'react';
+import { Colors } from '@/constants/Colors';
 
 interface QuickStat {
   nombreSeances: number | undefined;
@@ -18,6 +19,7 @@ interface QuickStat {
 
 export default function DashboardScreen() {
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const [quickStatsDB, setQuickStatsDB] = useState<QuickStat>();
 
   const workoutPrograms = [
@@ -44,20 +46,20 @@ export default function DashboardScreen() {
   console.log('quickStatsDB', JSON.stringify(quickStatsDB, null, 2));
   
   const quickStats = [
-    { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: '#FF9500' },
-    { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: '#5856D6' },
+    { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: colors.detail },
+    { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: colors.primary },
     { 
       title: 'Durée moyenne', 
       value: quickStatsDB?.nombreSeances > 0 
         ? Math.round((quickStatsDB.TempsTotal / quickStatsDB.nombreSeances) * 10) / 10 
         : 0, // Calculate average duration
       icon: 'chart.bar.fill', 
-      color: '#34C759' 
+      color: colors.accent 
     },
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedView style={styles.content}>
         {/* Header */}
         <View style={styles.header}>
@@ -72,7 +74,7 @@ export default function DashboardScreen() {
               key={index}
               intensity={80}
               tint={colorScheme === 'dark' ? 'dark' : 'light'}
-              style={styles.statCard}
+              style={[styles.statCard, { backgroundColor: colors.secondary }]}
             >
               <IconSymbol name={stat.icon as any} size={24} color={stat.color} />
               <ThemedText style={styles.statValue}>{stat.value}</ThemedText>
@@ -95,7 +97,7 @@ export default function DashboardScreen() {
         <View style={styles.sectionHeader}>
           <ThemedText style={styles.sectionTitle}>Tes programmes</ThemedText>
           <TouchableOpacity onPress={() => router.push('/programs')}>
-            <ThemedText style={styles.seeAllText}>Voir tout</ThemedText>
+            <ThemedText style={[styles.seeAllText, { color: colors.primary }]}>Voir tout</ThemedText>
           </TouchableOpacity>
         </View>
 
@@ -109,13 +111,13 @@ export default function DashboardScreen() {
               <BlurView
                 intensity={80}
                 tint={colorScheme === 'dark' ? 'dark' : 'light'}
-                style={styles.programCardContent}
+                style={[styles.programCardContent, { backgroundColor: colors.secondary }]}
               >
-                <IconSymbol name={program.icon as any} size={40} color="#007AFF" />
+                <IconSymbol name={program.icon as any} size={40} color={colors.primary} />
                 <ThemedText style={styles.programName}>{program.name}</ThemedText>
                 <View style={styles.programDetails}>
                   <ThemedText style={styles.programInfo}>{program.duration}</ThemedText>
-                  <View style={styles.dot} />
+                  <View style={[styles.dot, { backgroundColor: colors.primary }]} />
                   <ThemedText style={styles.programInfo}>{program.difficulty}</ThemedText>
                 </View>
               </BlurView>
@@ -126,7 +128,7 @@ export default function DashboardScreen() {
         {/* Quick Actions */}
         <View style={styles.quickActions}>
           <TouchableOpacity
-            style={[styles.actionButton, { backgroundColor: '#007AFF' }]}
+            style={[styles.actionButton, { backgroundColor: colors.primary }]}
             onPress={() => router.push('/new-workout')}
           >
             <ThemedText style={styles.actionButtonText}>Démarrer un entraînement</ThemedText>
@@ -140,10 +142,6 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Platform.select({
-      ios: 'rgba(255, 255, 255, 0.9)',
-      android: 'rgba(255, 255, 255, 0.95)',
-    }),
   },
   content: {
     flex: 1,
@@ -193,7 +191,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   seeAllText: {
-    color: '#007AFF',
     fontSize: 14,
   },
   programsScroll: {
@@ -226,7 +223,6 @@ const styles = StyleSheet.create({
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: '#007AFF',
     marginHorizontal: 8,
   },
   quickActions: {
