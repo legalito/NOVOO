@@ -111,7 +111,11 @@ export default function CreateWorkoutScreen() {
 
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
+<<<<<<< HEAD
           <ThemedText style={styles.backButton}>← Retour</ThemedText>
+=======
+          <ThemedText>← Retour</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
         </TouchableOpacity>
         <ThemedText style={styles.title}>Nouvelle séance</ThemedText>
       </View>
@@ -121,7 +125,11 @@ export default function CreateWorkoutScreen() {
         contentContainerStyle={styles.scrollViewContent}
       >
         <View style={styles.inputGroup}>
+<<<<<<< HEAD
           <ThemedText  style={styles.label}>Nom de la séance</ThemedText>
+=======
+          <ThemedText style={styles.label}>Nom de la séance</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <TextInput
             style={styles.input}
             placeholder="Ex: Séance Dos & Biceps"
@@ -214,13 +222,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginLeft: 16,
+<<<<<<< HEAD
     color: "#FFFFFF",
+=======
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   inputGroup: {
     marginBottom: 24,
   },
   label: {
+<<<<<<< HEAD
     color: "#FFFFFF",
+=======
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 8,
@@ -286,7 +300,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     opacity: 0.7,
   },
+<<<<<<< HEAD
   backButton: {
     color: "#FFFFFF",
   },
+=======
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
 });

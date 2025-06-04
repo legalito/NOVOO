@@ -41,12 +41,21 @@ const SettingItem = ({ title, onPress }: SettingItemProps) => {
   };
 
   return (
+<<<<<<< HEAD
     <TouchableOpacity style={[styles.settingItem, { borderBottomColor: colors.background, backgroundColor: colors.background }]} onPress={onPress}>
       <View style={styles.settingContent}>
         <IconSymbol name={getIconForTitle(title)} size={24} color={colors.accent} />
         <ThemedText style={[styles.settingText, { color: '#FFFFFF' }]}>{title}</ThemedText>
       </View>
       <IconSymbol name="chevron.right" size={24} color={colors.accent} />
+=======
+    <TouchableOpacity style={[styles.settingItem, { borderBottomColor: colors.secondary }]} onPress={onPress}>
+      <View style={styles.settingContent}>
+        <IconSymbol name={getIconForTitle(title)} size={24} color={colors.primary} />
+        <ThemedText style={styles.settingText}>{title}</ThemedText>
+      </View>
+      <IconSymbol name="chevron.right" size={24} color={colors.primary} />
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     </TouchableOpacity>
   );
 };
@@ -56,7 +65,11 @@ const SectionTitle = ({ title }: { title: string }) => {
   const colors = Colors[colorScheme ?? 'light'];
   
   return (
+<<<<<<< HEAD
     <ThemedText style={[styles.sectionTitle, { color: '#FFFFFF' }]}>{title}</ThemedText>
+=======
+    <ThemedText style={[styles.sectionTitle, { color: colors.primary }]}>{title}</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   );
 };
 
@@ -67,18 +80,31 @@ export default function ProfileScreen() {
   return (
     <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
+<<<<<<< HEAD
       <View style={[styles.header, { backgroundColor: colors.background }]}>
         <View style={[styles.profileImage, { backgroundColor: colors.accent }]}>
           <IconSymbol name="person.circle.fill" size={60} color={colors.primary} />
         </View>
         <ThemedText style={[styles.welcomeText, { color: '#FFFFFF' }]}>Hello Hugo !</ThemedText>
         <ThemedText style={[styles.subtitleText, { color: '#FFFFFF' }]}>Let's start your day</ThemedText>
+=======
+      <View style={[styles.header, { backgroundColor: colors.secondary }]}>
+        <View style={[styles.profileImage, { backgroundColor: colors.accent }]}>
+          <IconSymbol name="person.circle.fill" size={60} color={colors.primary} />
+        </View>
+        <ThemedText style={styles.welcomeText}>Hello Hugo !</ThemedText>
+        <ThemedText style={[styles.subtitleText, { color: colors.primary }]}>Let's start your day</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
       </View>
 
       <ScrollView style={styles.content}>
         {/* Compte Section */}
         <SectionTitle title="Compte" />
+<<<<<<< HEAD
         <View style={[styles.section, { backgroundColor: colors.background }]}>
+=======
+        <View style={[styles.section, { backgroundColor: colors.secondary }]}>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <SettingItem title="Profil" onPress={() => {}} />
           <SettingItem title="Compte" onPress={() => {}} />
           <SettingItem title="Gérer l'abonnement" onPress={() => {}} />
@@ -87,7 +113,11 @@ export default function ProfileScreen() {
 
         {/* Préférences Section */}
         <SectionTitle title="Préférences" />
+<<<<<<< HEAD
         <View style={[styles.section, { backgroundColor: colors.background }]}>
+=======
+        <View style={[styles.section, { backgroundColor: colors.secondary }]}>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <SettingItem title="Entrainements" onPress={() => {}} />
           <SettingItem title="Confidentialité et réseaux sociaux" onPress={() => {}} />
           <SettingItem title="Unités" onPress={() => {}} />
@@ -99,14 +129,22 @@ export default function ProfileScreen() {
 
         {/* Tutoriels Section */}
         <SectionTitle title="Tutoriels" />
+<<<<<<< HEAD
         <View style={[styles.section, { backgroundColor: colors.background }]}>
+=======
+        <View style={[styles.section, { backgroundColor: colors.secondary }]}>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <SettingItem title="Guide de démarrage" onPress={() => {}} />
           <SettingItem title="Aide de routine" onPress={() => {}} />
         </View>
 
         {/* Aide Section */}
         <SectionTitle title="Aide" />
+<<<<<<< HEAD
         <View style={[styles.section, { backgroundColor: colors.background }]}>
+=======
+        <View style={[styles.section, { backgroundColor: colors.secondary }]}>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <SettingItem title="Faire aux questions" onPress={() => {}} />
           <SettingItem title="Nous contacter" onPress={() => {}} />
           <SettingItem title="Evaluer" onPress={() => {}} />
@@ -115,7 +153,11 @@ export default function ProfileScreen() {
 
         {/* Coach Section */}
         <SectionTitle title="Coach" />
+<<<<<<< HEAD
         <View style={[styles.section, { backgroundColor: colors.background }]}>
+=======
+        <View style={[styles.section, { backgroundColor: colors.secondary }]}>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           <SettingItem title="Découvrir" onPress={() => {}} />
         </View>
 

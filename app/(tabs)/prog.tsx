@@ -17,6 +17,7 @@ interface QuickStat {
   nombreExercices: number;
 }
 
+<<<<<<< HEAD
 type StatCardProps = {
   title: string;
   value: string | number;
@@ -37,6 +38,8 @@ const StatCard = ({ title, value, unit }: StatCardProps) => {
     </View>
   );
 };
+=======
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
 export default function DashboardScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
@@ -66,15 +69,24 @@ export default function DashboardScreen() {
   console.log('quickStatsDB', JSON.stringify(quickStatsDB, null, 2));
   
   const quickStats = [
+<<<<<<< HEAD
     { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: '#FF9500' },
     { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: '#5856D6' },
+=======
+    { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: colors.detail },
+    { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: colors.primary },
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     { 
       title: 'Durée moyenne', 
       value: quickStatsDB?.nombreSeances > 0 
         ? Math.round((quickStatsDB.TempsTotal / quickStatsDB.nombreSeances) * 10) / 10 
         : 0, // Calculate average duration
       icon: 'chart.bar.fill', 
+<<<<<<< HEAD
       color: '#34C759' 
+=======
+      color: colors.accent 
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     },
   ];
 
@@ -83,13 +95,19 @@ export default function DashboardScreen() {
       <ThemedView style={styles.content}>
         {/* Header */}
         <View style={styles.header}>
+<<<<<<< HEAD
           <ThemedText style={[styles.welcomeText, { color: '#FFFFFF' }]}>Bonjour,</ThemedText>
           <ThemedText style={[styles.nameText, { color: '#FFFFFF' }]}>Hugo</ThemedText>
+=======
+          <ThemedText style={styles.welcomeText}>Bonjour,</ThemedText>
+          <ThemedText style={styles.nameText}>Hugo</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
         </View>
 
         {/* Quick Stats */}
         <View style={styles.statsContainer}>
           {quickStats.map((stat, index) => (
+<<<<<<< HEAD
             <View
               key={index}
               style={[styles.statCard, { backgroundColor: colors.background }]}
@@ -98,22 +116,48 @@ export default function DashboardScreen() {
               <ThemedText style={[styles.statValue, { color: '#FFFFFF' }]}>{stat.value}</ThemedText>
               <ThemedText style={[styles.statTitle, { color: '#FFFFFF' }]}>{stat.title}</ThemedText>
             </View>
+=======
+            <BlurView
+              key={index}
+              intensity={80}
+              tint={colorScheme === 'dark' ? 'dark' : 'light'}
+              style={[styles.statCard, { backgroundColor: colors.secondary }]}
+            >
+              <IconSymbol name={stat.icon as any} size={24} color={stat.color} />
+              <ThemedText style={styles.statValue}>{stat.value}</ThemedText>
+              <ThemedText style={styles.statTitle}>{stat.title}</ThemedText>
+            </BlurView>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           ))}
         </View>
         <WorkoutCalendar
           sessions={{
+<<<<<<< HEAD
             '2025-06-04': { type: 'workout', completed: true },
             '2025-06-06': { type: 'workout', completed: true },
             // Ajoute ici tous les jours faits
+=======
+            '2021-09-01': { type: 'full-body', completed: true },
+            '2021-09-02': { type: 'upper-body', completed: true },
+            '2021-09-03': { type: 'lower-body', completed: true },
+            '2021-09-04': { type: 'full-body', completed: true },
+            '2021-09-05': { type: 'upper-body', completed: true },
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           }}
           onDayPress={(date) => console.log('Selected date:', date)}
         />
 
         {/* Workout Programs */}
         <View style={styles.sectionHeader}>
+<<<<<<< HEAD
           <ThemedText style={[styles.sectionTitle, { color: '#FFFFFF' }]}>Tes programmes</ThemedText>
           <TouchableOpacity onPress={() => router.push('/programs')}>
             <ThemedText style={[styles.seeAllText, { color: colors.accent }]}>Voir tout</ThemedText>
+=======
+          <ThemedText style={styles.sectionTitle}>Tes programmes</ThemedText>
+          <TouchableOpacity onPress={() => router.push('/programs')}>
+            <ThemedText style={[styles.seeAllText, { color: colors.primary }]}>Voir tout</ThemedText>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           </TouchableOpacity>
         </View>
 
@@ -122,6 +166,7 @@ export default function DashboardScreen() {
             <TouchableOpacity
               key={program.id}
               style={styles.programCard}
+<<<<<<< HEAD
             >
               <View
                 style={[styles.programCardContent, ]}
@@ -134,6 +179,23 @@ export default function DashboardScreen() {
                   <ThemedText style={[styles.programInfo, { color: '#FFFFFF' }]}>{program.difficulty}</ThemedText>
                 </View>
               </View>
+=======
+              //onPress={() => router.push(`/program/${program.id}`)}
+            >
+              <BlurView
+                intensity={80}
+                tint={colorScheme === 'dark' ? 'dark' : 'light'}
+                style={[styles.programCardContent, { backgroundColor: colors.secondary }]}
+              >
+                <IconSymbol name={program.icon as any} size={40} color={colors.primary} />
+                <ThemedText style={styles.programName}>{program.name}</ThemedText>
+                <View style={styles.programDetails}>
+                  <ThemedText style={styles.programInfo}>{program.duration}</ThemedText>
+                  <View style={[styles.dot, { backgroundColor: colors.primary }]} />
+                  <ThemedText style={styles.programInfo}>{program.difficulty}</ThemedText>
+                </View>
+              </BlurView>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -144,6 +206,7 @@ export default function DashboardScreen() {
             style={[styles.actionButton, { backgroundColor: colors.primary }]}
             onPress={() => router.push('/new-workout')}
           >
+<<<<<<< HEAD
             <ThemedText style={[styles.actionButtonText, { color: '#FFFFFF' }]}>Démarrer un entraînement</ThemedText>
           </TouchableOpacity>
         </View>
@@ -157,6 +220,11 @@ export default function DashboardScreen() {
             <StatCard title="Water" value={2} unit="litres" />
           </View>
         </View>
+=======
+            <ThemedText style={styles.actionButtonText}>Démarrer un entraînement</ThemedText>
+          </TouchableOpacity>
+        </View>
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
       </ThemedView>
     </ScrollView>
   );
@@ -266,6 +334,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   actionButtonText: {
+<<<<<<< HEAD
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -296,4 +365,10 @@ const styles = StyleSheet.create({
   
   
   
+=======
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+>>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
 });
