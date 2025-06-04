@@ -4,6 +4,8 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol, type IconSymbolName } from '@/components/ui/IconSymbol';
 import { router } from 'expo-router';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 type SettingItemProps = {
   title: string;
@@ -11,6 +13,9 @@ type SettingItemProps = {
 };
 
 const SettingItem = ({ title, onPress }: SettingItemProps) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+
   const getIconForTitle = (title: string): IconSymbolName => {
     const iconMap: { [key: string]: IconSymbolName } = {
       'Profil': 'person.circle.fill',
@@ -36,36 +41,44 @@ const SettingItem = ({ title, onPress }: SettingItemProps) => {
   };
 
   return (
-    <TouchableOpacity style={styles.settingItem} onPress={onPress}>
+    <TouchableOpacity style={[styles.settingItem, { borderBottomColor: colors.background, backgroundColor: colors.background }]} onPress={onPress}>
       <View style={styles.settingContent}>
-        <IconSymbol name={getIconForTitle(title)} size={24} color="#666" />
-        <ThemedText style={styles.settingText}>{title}</ThemedText>
+        <IconSymbol name={getIconForTitle(title)} size={24} color={colors.accent} />
+        <ThemedText style={[styles.settingText, { color: '#FFFFFF' }]}>{title}</ThemedText>
       </View>
-      <IconSymbol name="chevron.right" size={24} color="#666" />
+      <IconSymbol name="chevron.right" size={24} color={colors.accent} />
     </TouchableOpacity>
   );
 };
 
-const SectionTitle = ({ title }: { title: string }) => (
-  <ThemedText style={styles.sectionTitle}>{title}</ThemedText>
-);
+const SectionTitle = ({ title }: { title: string }) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+  
+  return (
+    <ThemedText style={[styles.sectionTitle, { color: '#FFFFFF' }]}>{title}</ThemedText>
+  );
+};
 
 export default function ProfileScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.profileImage}>
-          <IconSymbol name="person.circle.fill" size={60} color="#666" />
+      <View style={[styles.header, { backgroundColor: colors.background }]}>
+        <View style={[styles.profileImage, { backgroundColor: colors.accent }]}>
+          <IconSymbol name="person.circle.fill" size={60} color={colors.primary} />
         </View>
-        <ThemedText style={styles.welcomeText}>Hello Hugo !</ThemedText>
-        <ThemedText style={styles.subtitleText}>Let's start your day</ThemedText>
+        <ThemedText style={[styles.welcomeText, { color: '#FFFFFF' }]}>Hello Hugo !</ThemedText>
+        <ThemedText style={[styles.subtitleText, { color: '#FFFFFF' }]}>Let's start your day</ThemedText>
       </View>
 
       <ScrollView style={styles.content}>
         {/* Compte Section */}
         <SectionTitle title="Compte" />
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: colors.background }]}>
           <SettingItem title="Profil" onPress={() => {}} />
           <SettingItem title="Compte" onPress={() => {}} />
           <SettingItem title="Gérer l'abonnement" onPress={() => {}} />
@@ -74,7 +87,7 @@ export default function ProfileScreen() {
 
         {/* Préférences Section */}
         <SectionTitle title="Préférences" />
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: colors.background }]}>
           <SettingItem title="Entrainements" onPress={() => {}} />
           <SettingItem title="Confidentialité et réseaux sociaux" onPress={() => {}} />
           <SettingItem title="Unités" onPress={() => {}} />
@@ -86,14 +99,14 @@ export default function ProfileScreen() {
 
         {/* Tutoriels Section */}
         <SectionTitle title="Tutoriels" />
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: colors.background }]}>
           <SettingItem title="Guide de démarrage" onPress={() => {}} />
           <SettingItem title="Aide de routine" onPress={() => {}} />
         </View>
 
         {/* Aide Section */}
         <SectionTitle title="Aide" />
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: colors.background }]}>
           <SettingItem title="Faire aux questions" onPress={() => {}} />
           <SettingItem title="Nous contacter" onPress={() => {}} />
           <SettingItem title="Evaluer" onPress={() => {}} />
@@ -102,16 +115,16 @@ export default function ProfileScreen() {
 
         {/* Coach Section */}
         <SectionTitle title="Coach" />
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: colors.background }]}>
           <SettingItem title="Découvrir" onPress={() => {}} />
         </View>
 
         {/* Logout Button */}
         <TouchableOpacity 
-          style={styles.logoutButton}
+          style={[styles.logoutButton, { backgroundColor: colors.detail }]}
           onPress={() => router.push('/')}
         >
-          <ThemedText style={styles.logoutText}>Se déconnecter</ThemedText>
+          <ThemedText style={[styles.logoutText, { color: colors.secondary }]}>Se déconnecter</ThemedText>
         </TouchableOpacity>
       </ScrollView>
     </ThemedView>
@@ -121,19 +134,16 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8F8',
   },
   header: {
     padding: 20,
     paddingTop: 60,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
   },
   profileImage: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#F0F0F0',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
@@ -145,7 +155,6 @@ const styles = StyleSheet.create({
   },
   subtitleText: {
     fontSize: 16,
-    color: '#666',
     marginBottom: 20,
   },
   content: {
@@ -154,13 +163,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#666',
     marginTop: 24,
     marginBottom: 8,
     marginHorizontal: 20,
   },
   section: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     marginHorizontal: 20,
   },
@@ -170,7 +177,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
   },
   settingContent: {
     flexDirection: 'row',
@@ -181,7 +187,6 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   logoutButton: {
-    backgroundColor: '#FF3B30',
     marginHorizontal: 20,
     marginVertical: 32,
     padding: 16,
@@ -189,7 +194,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoutText: {
-    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },

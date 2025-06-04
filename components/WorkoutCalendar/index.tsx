@@ -91,7 +91,7 @@ export function WorkoutCalendar({ sessions, onDayPress }: WorkoutCalendarProps) 
               {session && (
                 <View style={[
                   styles.indicator,
-                  { backgroundColor: session.completed ? '#34C759' : '#007AFF' }
+                  { backgroundColor: session.completed ? '#4DA3FF' : '#007AFF' }
                 ]} />
               )}
             </TouchableOpacity>

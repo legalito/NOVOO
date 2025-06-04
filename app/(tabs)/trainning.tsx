@@ -6,6 +6,8 @@ import { router } from 'expo-router';
 import { getUserWorkouts } from '../../service/workoutService';
 import { Exercise } from '../../components/WorkoutCalendar/add-exercise';
 import { useFocusEffect } from '@react-navigation/native';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 // Définition de l'interface Workout
 interface Workout {
@@ -18,6 +20,8 @@ interface Workout {
 }
 
 export default function TrainningScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const days = ['L', 'M', 'Mer', 'J', 'V', 'S', 'D'];
   const currentWeek = [3, 4, 5, 6, 7, 8, 9];
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -71,9 +75,9 @@ export default function TrainningScreen() {
               <View style={[
                 styles.dateCircle,
                 currentWeek[index] === 3 || currentWeek[index] === 4 || currentWeek[index] === 5 || currentWeek[index] === 8
-                  ? styles.completedDate : styles.inactiveDate
+                  ? { backgroundColor: colors.primary } : { backgroundColor: colors.accent }
               ]}>
-                <ThemedText style={styles.dateText}>{currentWeek[index]}</ThemedText>
+                <ThemedText style={[styles.dateText, { color: '#FFFFFF' }]}>{currentWeek[index]}</ThemedText>
               </View>
             </View>
           ))}
@@ -95,22 +99,22 @@ export default function TrainningScreen() {
               onPress={() => router.push(`/(workouts)/${workout.id}`)}
             >
               <View>
-                <ThemedText style={styles.workoutTitle}>{workout.name}</ThemedText>
-                <ThemedText style={styles.workoutSubtitle}>{workout.description}</ThemedText>
+                <ThemedText style={[styles.workoutTitle, { color: '#000000' }]}>{workout.name}</ThemedText>
+                <ThemedText style={[styles.workoutSubtitle, { color: '#000000' }]}>{workout.description}</ThemedText>
                 <View style={styles.workoutStats}>
                   <View style={styles.stat}>
-                    <ThemedText>{workout.exercises?.length || 0} exercices</ThemedText>
+                    <ThemedText style={{ color: '#000000' }}>{workout.exercises?.length || 0} exercices</ThemedText>
                   </View>
                   <View style={styles.stat}>
-                    <ThemedText>{new Date(workout.dateCreated).toLocaleDateString()}</ThemedText>
+                    <ThemedText style={{ color: '#000000' }}>{new Date(workout.dateCreated).toLocaleDateString()}</ThemedText>
                   </View>
                 </View>
               </View>
               <TouchableOpacity 
-                style={styles.playButton}
+                style={[styles.playButton, { backgroundColor: colors.primary }]}
                 onPress={() => router.push(`/(workouts)/start?id=${workout.id}`)}
               >
-                <ThemedText>▶</ThemedText>
+                <ThemedText style={{ color: '#FFFFFF' }}>▶</ThemedText>
               </TouchableOpacity>
             </TouchableOpacity>
           ))
@@ -124,10 +128,10 @@ export default function TrainningScreen() {
 
       {/* Add Workout Button */}
       <TouchableOpacity 
-        style={styles.addButton}
+        style={[styles.addButton, { backgroundColor: colors.primary }]}
         onPress={() => router.push('/(workouts)/create')}
       >
-        <ThemedText style={styles.addButtonText}>+ Créer une séance</ThemedText>
+        <ThemedText style={[styles.addButtonText, { color: '#FFFFFF' }]}>+ Créer une séance</ThemedText>
       </TouchableOpacity>
     </ThemedView>
   );

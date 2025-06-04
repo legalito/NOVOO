@@ -3,6 +3,8 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 type StatCardProps = {
   title: string;
@@ -10,23 +12,30 @@ type StatCardProps = {
   unit?: string;
 };
 
-const StatCard = ({ title, value, unit }: StatCardProps) => (
-  <View style={styles.statCard}>
-    <ThemedText style={styles.statTitle}>{title}</ThemedText>
-    <View style={styles.statValueContainer}>
-      <ThemedText style={styles.statValue}>{value}</ThemedText>
-      {unit && <ThemedText style={styles.statUnit}>{unit}</ThemedText>}
+const StatCard = ({ title, value, unit }: StatCardProps) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+
+  return (
+    <View style={styles.statCard}>
+      <ThemedText style={styles.statTitle}>{title}</ThemedText>
+      <View style={styles.statValueContainer}>
+        <ThemedText style={styles.statValue}>{value}</ThemedText>
+        {unit && <ThemedText style={styles.statUnit}>{unit}</ThemedText>}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export default function StatsScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const currentDate = new Date();
   const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedText style={styles.title}>Statistiques</ThemedText>
 
       <ScrollView style={styles.content}>
@@ -69,7 +78,7 @@ export default function StatsScreen() {
         {/* Workouts Section */}
         <View style={styles.workoutsSection}>
           <View style={styles.workoutsHeader}>
-            <IconSymbol name="calendar" size={24} color="#000" />
+            <IconSymbol name="calendar" size={24} color={colors.accent} />
             <ThemedText style={styles.workoutsTitle}>Workouts</ThemedText>
           </View>
           <ThemedText style={styles.workoutsSubtitle}>Goal → 4 workouts/week</ThemedText>
@@ -89,7 +98,7 @@ export default function StatsScreen() {
         <View style={styles.nutritionSection}>
           <View style={styles.nutritionHeader}>
             <ThemedText style={styles.nutritionTitle}>What I eat</ThemedText>
-            <ThemedText style={styles.seeAllText}>see all</ThemedText>
+            <ThemedText style={[styles.seeAllText, { color: colors.accent }]}>see all</ThemedText>
           </View>
           
           <View style={styles.nutritionStats}>
@@ -122,6 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: "#FFFFFF",
   },
   content: {
     flex: 1,
@@ -130,12 +140,14 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   dayText: {
+    color: "#FFFFFF",
     fontSize: 16,
     opacity: 0.7,
   },
   dateText: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: "#FFFFFF",
   },
   weightSection: {
     flexDirection: 'row',
@@ -149,15 +161,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     opacity: 0.7,
     marginBottom: 4,
+    color: "#FFFFFF",
   },
   weightValue: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: "#FFFFFF",
   },
   weightUnit: {
     fontSize: 16,
     opacity: 0.7,
     marginLeft: 4,
+    color: "#FFFFFF",
   },
   statsGrid: {
     marginBottom: 24,
@@ -166,6 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
+    color: "#000",
   },
   statCard: {
     backgroundColor: '#F5F5F5',
@@ -174,6 +190,7 @@ const styles = StyleSheet.create({
     width: '48%',
   },
   statTitle: {
+    color: "#000",
     fontSize: 16,
     marginBottom: 8,
   },

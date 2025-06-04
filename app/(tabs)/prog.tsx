@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import { useEffect } from 'react';
 import { getQuickStats } from '@/service/homeService'; // Hypothetical service to fetch quick stats
 import { useState } from 'react';
+import { Colors } from '@/constants/Colors';
 
 interface QuickStat {
   nombreSeances: number | undefined;
@@ -16,8 +17,29 @@ interface QuickStat {
   nombreExercices: number;
 }
 
+type StatCardProps = {
+  title: string;
+  value: string | number;
+  unit?: string;
+};
+
+const StatCard = ({ title, value, unit }: StatCardProps) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+
+  return (
+    <View style={styles.statCardNeed}>
+      <ThemedText style={styles.statTitle}>{title}</ThemedText>
+      <View style={styles.statValueContainer}>
+        <ThemedText style={styles.statValue}>{value}</ThemedText>
+        {unit && <ThemedText style={styles.statUnit}>{unit}</ThemedText>}
+      </View>
+    </View>
+  );
+};
 export default function DashboardScreen() {
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
   const [quickStatsDB, setQuickStatsDB] = useState<QuickStat>();
 
   const workoutPrograms = [
@@ -57,45 +79,41 @@ export default function DashboardScreen() {
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedView style={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <ThemedText style={styles.welcomeText}>Bonjour,</ThemedText>
-          <ThemedText style={styles.nameText}>Hugo</ThemedText>
+          <ThemedText style={[styles.welcomeText, { color: '#FFFFFF' }]}>Bonjour,</ThemedText>
+          <ThemedText style={[styles.nameText, { color: '#FFFFFF' }]}>Hugo</ThemedText>
         </View>
 
         {/* Quick Stats */}
         <View style={styles.statsContainer}>
           {quickStats.map((stat, index) => (
-            <BlurView
+            <View
               key={index}
-              intensity={80}
-              tint={colorScheme === 'dark' ? 'dark' : 'light'}
-              style={styles.statCard}
+              style={[styles.statCard, { backgroundColor: colors.background }]}
             >
-              <IconSymbol name={stat.icon as any} size={24} color={stat.color} />
-              <ThemedText style={styles.statValue}>{stat.value}</ThemedText>
-              <ThemedText style={styles.statTitle}>{stat.title}</ThemedText>
-            </BlurView>
+              <IconSymbol name={stat.icon as any} size={24} color={colors.accent} />
+              <ThemedText style={[styles.statValue, { color: '#FFFFFF' }]}>{stat.value}</ThemedText>
+              <ThemedText style={[styles.statTitle, { color: '#FFFFFF' }]}>{stat.title}</ThemedText>
+            </View>
           ))}
         </View>
         <WorkoutCalendar
           sessions={{
-            '2021-09-01': { type: 'full-body', completed: true },
-            '2021-09-02': { type: 'upper-body', completed: true },
-            '2021-09-03': { type: 'lower-body', completed: true },
-            '2021-09-04': { type: 'full-body', completed: true },
-            '2021-09-05': { type: 'upper-body', completed: true },
+            '2025-06-04': { type: 'workout', completed: true },
+            '2025-06-06': { type: 'workout', completed: true },
+            // Ajoute ici tous les jours faits
           }}
           onDayPress={(date) => console.log('Selected date:', date)}
         />
 
         {/* Workout Programs */}
         <View style={styles.sectionHeader}>
-          <ThemedText style={styles.sectionTitle}>Tes programmes</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: '#FFFFFF' }]}>Tes programmes</ThemedText>
           <TouchableOpacity onPress={() => router.push('/programs')}>
-            <ThemedText style={styles.seeAllText}>Voir tout</ThemedText>
+            <ThemedText style={[styles.seeAllText, { color: colors.accent }]}>Voir tout</ThemedText>
           </TouchableOpacity>
         </View>
 
@@ -104,21 +122,18 @@ export default function DashboardScreen() {
             <TouchableOpacity
               key={program.id}
               style={styles.programCard}
-              //onPress={() => router.push(`/program/${program.id}`)}
             >
-              <BlurView
-                intensity={80}
-                tint={colorScheme === 'dark' ? 'dark' : 'light'}
-                style={styles.programCardContent}
+              <View
+                style={[styles.programCardContent, ]}
               >
-                <IconSymbol name={program.icon as any} size={40} color="#007AFF" />
-                <ThemedText style={styles.programName}>{program.name}</ThemedText>
+                <IconSymbol name={program.icon as any} size={40} color={colors.accent} />
+                <ThemedText style={[styles.programName, { color: '#FFFFFF' }]}>{program.name}</ThemedText>
                 <View style={styles.programDetails}>
-                  <ThemedText style={styles.programInfo}>{program.duration}</ThemedText>
-                  <View style={styles.dot} />
-                  <ThemedText style={styles.programInfo}>{program.difficulty}</ThemedText>
+                  <ThemedText style={[styles.programInfo, { color: '#FFFFFF' }]}>{program.duration}</ThemedText>
+                  <View style={[styles.dot, { backgroundColor: colors.accent }]} />
+                  <ThemedText style={[styles.programInfo, { color: '#FFFFFF' }]}>{program.difficulty}</ThemedText>
                 </View>
-              </BlurView>
+              </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -126,11 +141,21 @@ export default function DashboardScreen() {
         {/* Quick Actions */}
         <View style={styles.quickActions}>
           <TouchableOpacity
-            style={[styles.actionButton, { backgroundColor: '#007AFF' }]}
+            style={[styles.actionButton, { backgroundColor: colors.primary }]}
             onPress={() => router.push('/new-workout')}
           >
-            <ThemedText style={styles.actionButtonText}>Démarrer un entraînement</ThemedText>
+            <ThemedText style={[styles.actionButtonText, { color: '#FFFFFF' }]}>Démarrer un entraînement</ThemedText>
           </TouchableOpacity>
+        </View>
+        <View style={styles.statsGrid}>
+          <View style={styles.statsRow}>
+            <StatCard title="Calories" value={720} unit="kcal" />
+            <StatCard title="Steps" value="10 000" unit="steps" />
+          </View>
+          <View style={styles.statsRow}>
+            <StatCard title="Sleep" value={7} unit="heures" />
+            <StatCard title="Water" value={2} unit="litres" />
+          </View>
         </View>
       </ThemedView>
     </ScrollView>
@@ -140,10 +165,6 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Platform.select({
-      ios: 'rgba(255, 255, 255, 0.9)',
-      android: 'rgba(255, 255, 255, 0.95)',
-    }),
   },
   content: {
     flex: 1,
@@ -193,7 +214,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   seeAllText: {
-    color: '#007AFF',
     fontSize: 14,
   },
   programsScroll: {
@@ -226,7 +246,6 @@ const styles = StyleSheet.create({
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: '#007AFF',
     marginHorizontal: 8,
   },
   quickActions: {
@@ -247,8 +266,34 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   actionButtonText: {
-    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
+ 
+  statValueContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+  },
+  statsGrid: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  statUnit: {
+    fontSize: 14,
+  },
+  statCardNeed: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 16,
+    padding: 16,
+    width: '48%',
+  },
+  
+  
+  
 });

@@ -6,14 +6,16 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { router , useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { loginUser } from '@/service/authService';
+import { Colors } from '@/constants/Colors';
 
 export default function TabLoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
 
   const handleLogin = async () => {
     try {
@@ -43,7 +45,7 @@ export default function TabLoginScreen() {
           <IconSymbol 
             name="person.circle.fill" 
             size={100} 
-            color={colorScheme === 'dark' ? '#ffffff' : '#000000'} 
+            color={colors.accent} 
           />
           <ThemedText style={styles.title}>Welcome Back</ThemedText>
           <ThemedText style={styles.subtitle}>Sign in to continue</ThemedText>
@@ -68,7 +70,7 @@ export default function TabLoginScreen() {
               <IconSymbol 
                 name="envelope.fill" 
                 size={20} 
-                color={colorScheme === 'dark' ? '#ffffff80' : '#00000080'} 
+                color={colors.accent} 
               />
               <TextInput
                 placeholder="Email"
@@ -88,7 +90,7 @@ export default function TabLoginScreen() {
               <IconSymbol 
                 name="lock.fill" 
                 size={20} 
-                color={colorScheme === 'dark' ? '#ffffff80' : '#00000080'} 
+                color={colors.accent} 
               />
               <TextInput
                 placeholder="Password"
@@ -107,7 +109,7 @@ export default function TabLoginScreen() {
               style={styles.forgotPassword}
               onPress={() => console.log('Forgot password')}
             >
-              <ThemedText style={styles.forgotPasswordText}>Forgot Password?</ThemedText>
+              <ThemedText style={[styles.forgotPasswordText, { color: colors.accent }]}>Forgot Password?</ThemedText>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
@@ -117,7 +119,7 @@ export default function TabLoginScreen() {
             <View style={styles.signupContainer}>
               <ThemedText style={styles.signupText}>Don't have an account? </ThemedText>
               <TouchableOpacity onPress={() => router.push('/(onboarding)/register')}>
-                <ThemedText style={styles.signupLink}>Sign Up</ThemedText>
+                <ThemedText style={[styles.signupLink, { color: colors.accent }]}>Sign Up</ThemedText>
               </TouchableOpacity>
             </View>
           </BlurView>

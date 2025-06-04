@@ -3,24 +3,34 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const primaryColor = '#243ef4';  // Couleur des boutons
+const secondaryColor = '#FFFFFF';  // Fond blanc
+const accentColor = '#ddeb59';   // Couleur des icônes et écritures
+const detailColor = '#ff7a00';
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: '#000000',
+    background: '#252525',
+    tint: primaryColor,
+    icon: accentColor,
+    tabIconDefault: accentColor,
+    tabIconSelected: primaryColor,
+    primary: primaryColor,
+    secondary: secondaryColor,
+    accent: accentColor,
+    detail: detailColor,
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#000000',
+    background: '#252525',
+    tint: primaryColor,
+    icon: accentColor,
+    tabIconDefault: accentColor,
+    tabIconSelected: primaryColor,
+    primary: primaryColor,
+    secondary: secondaryColor,
+    accent: accentColor,
+    detail: detailColor,
   },
 };
