@@ -17,11 +17,7 @@ const StatCard = ({ title, value, unit }: StatCardProps) => {
   const colors = Colors[colorScheme ?? 'light'];
 
   return (
-<<<<<<< HEAD
-    <View style={styles.statCard}>
-=======
     <View style={[styles.statCard, { backgroundColor: colors.secondary }]}>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
       <ThemedText style={styles.statTitle}>{title}</ThemedText>
       <View style={styles.statValueContainer}>
         <ThemedText style={styles.statValue}>{value}</ThemedText>
@@ -80,15 +76,9 @@ export default function StatsScreen() {
         </View>
 
         {/* Workouts Section */}
-<<<<<<< HEAD
-        <View style={styles.workoutsSection}>
-          <View style={styles.workoutsHeader}>
-            <IconSymbol name="calendar" size={24} color={colors.accent} />
-=======
         <View style={[styles.workoutsSection, { backgroundColor: colors.secondary }]}>
           <View style={styles.workoutsHeader}>
             <IconSymbol name="calendar" size={24} color={colors.primary} />
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
             <ThemedText style={styles.workoutsTitle}>Workouts</ThemedText>
           </View>
           <ThemedText style={styles.workoutsSubtitle}>Goal → 4 workouts/week</ThemedText>
@@ -97,14 +87,10 @@ export default function StatsScreen() {
           <View style={styles.progressBars}>
             {[4, 3, 2, 3, 2, 1].map((value, index) => (
               <View key={index} style={styles.progressBarContainer}>
-<<<<<<< HEAD
-                <View style={[styles.progressBar, { height: `${(value / 4) * 100}%` }]} />
-=======
                 <View style={[styles.progressBar, { 
                   height: `${(value / 4) * 100}%`,
                   backgroundColor: colors.primary 
                 }]} />
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
                 <ThemedText style={styles.progressBarLabel}>février</ThemedText>
               </View>
             ))}
@@ -112,17 +98,10 @@ export default function StatsScreen() {
         </View>
 
         {/* Nutrition Section */}
-<<<<<<< HEAD
-        <View style={styles.nutritionSection}>
-          <View style={styles.nutritionHeader}>
-            <ThemedText style={styles.nutritionTitle}>What I eat</ThemedText>
-            <ThemedText style={[styles.seeAllText, { color: colors.accent }]}>see all</ThemedText>
-=======
         <View style={[styles.nutritionSection, { backgroundColor: colors.secondary }]}>
           <View style={styles.nutritionHeader}>
             <ThemedText style={styles.nutritionTitle}>What I eat</ThemedText>
             <ThemedText style={[styles.seeAllText, { color: colors.primary }]}>see all</ThemedText>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
           </View>
           
           <View style={styles.nutritionStats}>
@@ -155,10 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   content: {
     flex: 1,
@@ -167,20 +142,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   dayText: {
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     fontSize: 16,
     opacity: 0.7,
   },
   dateText: {
     fontSize: 24,
     fontWeight: 'bold',
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   weightSection: {
     flexDirection: 'row',
@@ -194,27 +161,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     opacity: 0.7,
     marginBottom: 4,
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   weightValue: {
     fontSize: 24,
     fontWeight: 'bold',
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   weightUnit: {
     fontSize: 16,
     opacity: 0.7,
     marginLeft: 4,
-<<<<<<< HEAD
-    color: "#FFFFFF",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   statsGrid: {
     marginBottom: 24,
@@ -223,24 +178,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
-<<<<<<< HEAD
-    color: "#000",
   },
   statCard: {
-    backgroundColor: '#F5F5F5',
-=======
-  },
-  statCard: {
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 16,
     padding: 16,
     width: '48%',
   },
   statTitle: {
-<<<<<<< HEAD
-    color: "#000",
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     fontSize: 16,
     marginBottom: 8,
   },
@@ -258,10 +202,6 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   workoutsSection: {
-<<<<<<< HEAD
-    backgroundColor: '#F5F5F5',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 16,
     padding: 16,
     marginBottom: 24,
@@ -293,10 +233,6 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     width: '100%',
-<<<<<<< HEAD
-    backgroundColor: '#007AFF',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 4,
     marginBottom: 8,
   },
@@ -305,10 +241,6 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   nutritionSection: {
-<<<<<<< HEAD
-    backgroundColor: '#F5F5F5',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 16,
     padding: 16,
   },
@@ -324,28 +256,6 @@ const styles = StyleSheet.create({
   },
   seeAllText: {
     fontSize: 14,
-<<<<<<< HEAD
-    color: '#007AFF',
-  },
-  nutritionStats: {
-    gap: 16,
-  },
-  nutritionStat: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  nutritionLabel: {
-    fontSize: 16,
-  },
-  nutritionValue: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  nutritionUnit: {
-    fontSize: 14,
-    opacity: 0.7,
-=======
   },
   nutritionStats: {
     flexDirection: 'row',
@@ -367,6 +277,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     opacity: 0.7,
     marginLeft: 2,
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
 }); 

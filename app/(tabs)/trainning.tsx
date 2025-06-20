@@ -61,20 +61,12 @@ export default function TrainningScreen() {
   );
 
   return (
-<<<<<<< HEAD
-    <ThemedView style={styles.container}>
-=======
     <ThemedView style={[styles.container, { backgroundColor: colors.background }]}>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
       <ThemedText style={styles.title}>Mes séances</ThemedText>
       <ThemedText style={styles.subtitle}>Commence un entrainement</ThemedText>
 
       {/* Calendar Section */}
-<<<<<<< HEAD
-      <View style={styles.calendarContainer}>
-=======
       <View style={[styles.calendarContainer, { backgroundColor: colors.secondary }]}>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
         <ThemedText style={styles.sectionTitle}>Workouts</ThemedText>
         <View style={styles.daysRow}>
           {days.map((day, index) => (
@@ -85,11 +77,7 @@ export default function TrainningScreen() {
                 currentWeek[index] === 3 || currentWeek[index] === 4 || currentWeek[index] === 5 || currentWeek[index] === 8
                   ? { backgroundColor: colors.primary } : { backgroundColor: colors.accent }
               ]}>
-<<<<<<< HEAD
-                <ThemedText style={[styles.dateText, { color: '#FFFFFF' }]}>{currentWeek[index]}</ThemedText>
-=======
                 <ThemedText style={styles.dateText}>{currentWeek[index]}</ThemedText>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
               </View>
             </View>
           ))}
@@ -100,31 +88,13 @@ export default function TrainningScreen() {
       <ScrollView style={styles.workoutsList}>
         {loading ? (
           <View style={styles.loadingContainer}>
-<<<<<<< HEAD
-            <ActivityIndicator size="large" color="#007AFF" />
-=======
             <ActivityIndicator size="large" color={colors.primary} />
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
             <ThemedText style={styles.loadingText}>Chargement des séances...</ThemedText>
           </View>
         ) : workouts.length > 0 ? (
           workouts.map((workout) => (
             <TouchableOpacity 
               key={workout.id}
-<<<<<<< HEAD
-              style={styles.workoutCard}
-              onPress={() => router.push(`/(workouts)/${workout.id}`)}
-            >
-              <View>
-                <ThemedText style={[styles.workoutTitle, { color: '#000000' }]}>{workout.name}</ThemedText>
-                <ThemedText style={[styles.workoutSubtitle, { color: '#000000' }]}>{workout.description}</ThemedText>
-                <View style={styles.workoutStats}>
-                  <View style={styles.stat}>
-                    <ThemedText style={{ color: '#000000' }}>{workout.exercises?.length || 0} exercices</ThemedText>
-                  </View>
-                  <View style={styles.stat}>
-                    <ThemedText style={{ color: '#000000' }}>{new Date(workout.dateCreated).toLocaleDateString()}</ThemedText>
-=======
               style={[styles.workoutCard, { backgroundColor: colors.secondary }]}
               onPress={() => router.push(`/(workouts)/${workout.id}`)}
             >
@@ -137,7 +107,6 @@ export default function TrainningScreen() {
                   </View>
                   <View style={styles.stat}>
                     <ThemedText>{new Date(workout.dateCreated).toLocaleDateString()}</ThemedText>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
                   </View>
                 </View>
               </View>
@@ -145,11 +114,7 @@ export default function TrainningScreen() {
                 style={[styles.playButton, { backgroundColor: colors.primary }]}
                 onPress={() => router.push(`/(workouts)/start?id=${workout.id}`)}
               >
-<<<<<<< HEAD
-                <ThemedText style={{ color: '#FFFFFF' }}>▶</ThemedText>
-=======
                 <ThemedText style={{ color: colors.secondary }}>▶</ThemedText>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
               </TouchableOpacity>
             </TouchableOpacity>
           ))
@@ -166,11 +131,7 @@ export default function TrainningScreen() {
         style={[styles.addButton, { backgroundColor: colors.primary }]}
         onPress={() => router.push('/(workouts)/create')}
       >
-<<<<<<< HEAD
-        <ThemedText style={[styles.addButtonText, { color: '#FFFFFF' }]}>+ Créer une séance</ThemedText>
-=======
         <ThemedText style={[styles.addButtonText, { color: colors.secondary }]}>+ Créer une séance</ThemedText>
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
       </TouchableOpacity>
     </ThemedView>
   );
@@ -193,10 +154,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   calendarContainer: {
-<<<<<<< HEAD
-    backgroundColor: '#F5F5F5',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 20,
     padding: 16,
     marginBottom: 24,
@@ -224,15 +181,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-<<<<<<< HEAD
-  completedDate: {
-    backgroundColor: '#007AFF',
-  },
-  inactiveDate: {
-    backgroundColor: '#E0E0E0',
-  },
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   dateText: {
     color: 'white',
     fontSize: 16,
@@ -241,10 +189,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   workoutCard: {
-<<<<<<< HEAD
-    backgroundColor: '#F5F5F5',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 20,
     padding: 16,
     marginBottom: 16,
@@ -274,28 +218,16 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-<<<<<<< HEAD
-    backgroundColor: '#007AFF',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     justifyContent: 'center',
     alignItems: 'center',
   },
   addButton: {
-<<<<<<< HEAD
-    backgroundColor: '#007AFF',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     borderRadius: 20,
     padding: 16,
     alignItems: 'center',
     marginTop: 16,
   },
   addButtonText: {
-<<<<<<< HEAD
-    color: 'white',
-=======
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     fontSize: 16,
     fontWeight: '600',
   },
@@ -310,15 +242,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   emptyContainer: {
-<<<<<<< HEAD
-    padding: 20,
-    alignItems: 'center',
-=======
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
   },
   emptyText: {
     fontSize: 18,
@@ -326,11 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   emptySubtext: {
-<<<<<<< HEAD
-    fontSize: 14,
-=======
     fontSize: 16,
->>>>>>> e51dcd8e84724688b8f4c4924d730f55f89ca583
     opacity: 0.7,
   },
 });
