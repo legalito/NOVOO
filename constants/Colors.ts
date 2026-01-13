@@ -3,18 +3,18 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const primaryColor = '#243ef4';
-const secondaryColor = '#FFF';
-const accentColor = '#ddeb59';
+const primaryColor = '#243ef4';  // Couleur des boutons
+const secondaryColor = '#1D1D1D';  // Fond des cartes
+const accentColor = '#ddeb59';   // Couleur des icônes et écritures
 const detailColor = '#ff7a00';
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: secondaryColor,
+    text: '#FFFFFF',
+    background: '#252525',
     tint: primaryColor,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: '#FFFFFF',
+    tabIconDefault: '#FFFFFF',
     tabIconSelected: primaryColor,
     primary: primaryColor,
     secondary: secondaryColor,
@@ -22,11 +22,11 @@ export const Colors = {
     detail: detailColor,
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#FFFFFF',
+    background: '#252525',
     tint: primaryColor,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#FFFFFF',
+    tabIconDefault: '#FFFFFF',
     tabIconSelected: primaryColor,
     primary: primaryColor,
     secondary: secondaryColor,

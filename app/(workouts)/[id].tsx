@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   exerciseCard: {
     flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#252525',
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 12,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#333333',
     marginRight: 16,
     overflow: 'hidden',
   },

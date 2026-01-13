@@ -1,0 +1,79 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+# Cursor Rules for Coaching App Project
+
+## 🔧 Contexte du projet
+
+- Application mobile de suivi de musculation et de coaching.
+- Architecture front en React Native (Expo) et back-end via Supabase.
+- Utilisateurs = clients coachés qui suivent un programme et enregistrent leurs séances.
+
+## 📁 Fichiers à suivre (tu pourras les @ dès qu’ils existent)
+
+- @app/screens/ (toutes les pages visibles par l’utilisateur)
+- @supabase/schema.sql (structure BDD)
+- @lib/api/ (requêtes vers Supabase)
+- @types/ (types TypeScript partagés)
+
+## 🗃 Données importantes en base de données
+
+- `users`: infos personnelles (taille, poids, date de naissance, etc.).
+- `workouts`: séances créées.
+- `exercises`: exercices disponibles.
+- `workout_exercises`: lien séance ↔ exercices (avec séries, reps, etc.).
+- `progress`: évolution du poids, muscles, etc.
+- `plans`: programmes personnalisés.
+- `calendar`: séances planifiées.
+- `subscriptions`: abonnements (gratuit ou premium).
+
+## ⚙️ Fonctionnalités principales
+
+### Authentification
+- Auth Supabase (email + mdp).
+- Création / connexion / déconnexion utilisateur.
+
+### Tableau de bord
+- Accès rapide au dernier entraînement, programme et prochaines séances.
+
+### Entraînement
+- Création de séances (choix des exercices, séries, reps).
+- Historique des séances avec visualisation.
+- Modification des séances.
+
+### Programme
+- Attribution de programmes.
+- Suivi de l'avancement (complété ou non).
+
+### Suivi & Statistiques
+- Courbes de poids, performances, objectifs.
+- Statistiques filtrées par période.
+
+### Calendrier
+- Visualisation des séances à venir.
+- Planification de futurs entraînements.
+
+### Profil utilisateur
+- Édition du profil.
+- Objectifs (prise de masse, perte de poids, maintien...).
+
+## 🔄 Règles Cursor spécifiques
+
+- Le front est connecté à Supabase avec Supabase JS Client.
+- Préfère `zod` pour la validation côté client.
+- Utilise `react-query` ou `swr` pour la gestion des appels (selon ce que tu choisis).
+- Les dates sont toujours manipulées avec `dayjs`.
+- Tous les types sont en TypeScript strict.
+- Ne jamais hardcoder les données d'utilisateur — toujours passer par le context utilisateur.
+
+## 💬 Astuce d’utilisation
+
+> Si tu veux coder une feature (ex : stats mensuelles), commence par un schema clair de la donnée, puis demande une fonction dans `/lib/api/`, enfin branche-la dans `/screens/`.

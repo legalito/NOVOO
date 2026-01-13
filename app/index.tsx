@@ -21,7 +21,7 @@ export default function TabLoginScreen() {
     try {
       await loginUser(email, password);
       router.push('/(tabs)/prog');
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
       if (error.code === 'auth/invalid-email') {
         setErrorMessage("Adresse e-mail invalide. Veuillez réessayer.");
@@ -34,7 +34,7 @@ export default function TabLoginScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={[styles.container, { backgroundColor: colors.background }]}
+      style={styles.container}
     >
       <ThemedView style={styles.content}>
         {/* Header Animation */}
@@ -45,7 +45,7 @@ export default function TabLoginScreen() {
           <IconSymbol 
             name="person.circle.fill" 
             size={100} 
-            color={colors.primary} 
+            color={colors.accent} 
           />
           <ThemedText style={styles.title}>Welcome Back</ThemedText>
           <ThemedText style={styles.subtitle}>Sign in to continue</ThemedText>
@@ -66,18 +66,18 @@ export default function TabLoginScreen() {
             tint={colorScheme === 'dark' ? 'dark' : 'light'}
             style={styles.formContainer}
           >
-            <View style={[styles.inputContainer, { backgroundColor: colors.secondary }]}>
+            <View style={styles.inputContainer}>
               <IconSymbol 
                 name="envelope.fill" 
                 size={20} 
-                color={colors.primary} 
+                color={colors.accent} 
               />
               <TextInput
                 placeholder="Email"
-                placeholderTextColor={colors.text}
+                placeholderTextColor={colorScheme === 'dark' ? '#ffffff80' : '#00000080'}
                 style={[
                   styles.input,
-                  { color: colors.text }
+                  { color: colorScheme === 'dark' ? '#ffffff' : '#000000' }
                 ]}
                 value={email}
                 onChangeText={setEmail}
@@ -86,18 +86,18 @@ export default function TabLoginScreen() {
               />
             </View>
 
-            <View style={[styles.inputContainer, { backgroundColor: colors.secondary }]}>
+            <View style={styles.inputContainer}>
               <IconSymbol 
                 name="lock.fill" 
                 size={20} 
-                color={colors.primary} 
+                color={colors.accent} 
               />
               <TextInput
                 placeholder="Password"
-                placeholderTextColor={colors.text}
+                placeholderTextColor={colorScheme === 'dark' ? '#ffffff80' : '#00000080'}
                 style={[
                   styles.input,
-                  { color: colors.text }
+                  { color: colorScheme === 'dark' ? '#ffffff' : '#000000' }
                 ]}
                 value={password}
                 onChangeText={setPassword}
@@ -109,20 +109,17 @@ export default function TabLoginScreen() {
               style={styles.forgotPassword}
               onPress={() => console.log('Forgot password')}
             >
-              <ThemedText style={[styles.forgotPasswordText, { color: colors.primary }]}>Forgot Password?</ThemedText>
+              <ThemedText style={[styles.forgotPasswordText, { color: colors.accent }]}>Forgot Password?</ThemedText>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={[styles.loginButton, { backgroundColor: colors.primary }]} 
-              onPress={handleLogin}
-            >
+            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
               <ThemedText style={styles.loginButtonText}>Sign In</ThemedText>
             </TouchableOpacity>
 
             <View style={styles.signupContainer}>
               <ThemedText style={styles.signupText}>Don't have an account? </ThemedText>
               <TouchableOpacity onPress={() => router.push('/(onboarding)/register')}>
-                <ThemedText style={[styles.signupLink, { color: colors.primary }]}>Sign Up</ThemedText>
+                <ThemedText style={[styles.signupLink, { color: colors.accent }]}>Sign Up</ThemedText>
               </TouchableOpacity>
             </View>
           </BlurView>
@@ -166,6 +163,10 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: Platform.select({
+      ios: 'rgba(255, 255, 255, 0.1)',
+      android: 'rgba(255, 255, 255, 0.05)',
+    }),
     borderRadius: 12,
     marginBottom: 16,
     paddingHorizontal: 16,
@@ -182,8 +183,10 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontSize: 14,
+    opacity: 0.7,
   },
   loginButton: {
+    backgroundColor: '#007AFF',
     borderRadius: 12,
     height: 50,
     justifyContent: 'center',
@@ -206,10 +209,11 @@ const styles = StyleSheet.create({
   },
   signupLink: {
     fontSize: 14,
+    color: '#007AFF',
     fontWeight: 'bold',
   },
   errorText: {
-    color: '#ff7a00',
+    color: 'red',
     marginBottom: 20,
     textAlign: 'center',
   },

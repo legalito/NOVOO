@@ -1,5 +1,4 @@
-import { StyleSheet, View, ScrollView, TouchableOpacity, Platform } from 'react-native';
-import { BlurView } from 'expo-blur';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Platform, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -7,7 +6,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { WorkoutCalendar } from '@/components/WorkoutCalendar/index';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
-import { getQuickStats } from '@/service/homeService'; // Hypothetical service to fetch quick stats
+import { getQuickStats } from '@/service/homeService';
 import { useState } from 'react';
 import { Colors } from '@/constants/Colors';
 
@@ -28,11 +27,8 @@ export default function DashboardScreen() {
     { id: 3, name: 'Lower Body', duration: '50 min', difficulty: 'Avancé', icon: 'figure.run' },
   ];
 
-  
-
   useEffect(() => {
     const fetchData = async () => {
-      // Simulate fetching data
       try {
         const stats = await getQuickStats();
         setQuickStatsDB(stats);
@@ -43,16 +39,14 @@ export default function DashboardScreen() {
     fetchData();
   }, []);
  
-  console.log('quickStatsDB', JSON.stringify(quickStatsDB, null, 2));
-  
   const quickStats = [
-    { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: colors.detail },
-    { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: colors.primary },
+    { title: 'Séances', value: quickStatsDB?.nombreSeances || 0, icon: 'flame.fill', color: colors.accent },
+    { title: 'Temps total', value: quickStatsDB?.TempsTotal || 0, icon: 'clock.fill', color: colors.accent },
     { 
       title: 'Durée moyenne', 
-      value: quickStatsDB?.nombreSeances > 0 
+      value: quickStatsDB?.nombreSeances && quickStatsDB?.TempsTotal
         ? Math.round((quickStatsDB.TempsTotal / quickStatsDB.nombreSeances) * 10) / 10 
-        : 0, // Calculate average duration
+        : 0,
       icon: 'chart.bar.fill', 
       color: colors.accent 
     },
@@ -62,26 +56,37 @@ export default function DashboardScreen() {
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <ThemedView style={styles.content}>
         {/* Header */}
+        <View style={styles.logo}>
+          <Image
+            source={require('../../assets/images/novoo_logo.png')}
+            style={styles.logoImage}
+          />
+        </View>
         <View style={styles.header}>
-          <ThemedText style={styles.welcomeText}>Bonjour,</ThemedText>
-          <ThemedText style={styles.nameText}>Hugo</ThemedText>
+          <Image
+            source={require('../../assets/images/icon.png')}
+            style={styles.profileImage}
+          />
+          <View>
+            <ThemedText style={styles.welcomeText}>Bonjour,</ThemedText>
+            <ThemedText style={styles.nameText}>Let's start your day</ThemedText>
+          </View>
         </View>
 
         {/* Quick Stats */}
         <View style={styles.statsContainer}>
           {quickStats.map((stat, index) => (
-            <BlurView
+            <View
               key={index}
-              intensity={80}
-              tint={colorScheme === 'dark' ? 'dark' : 'light'}
-              style={[styles.statCard, { backgroundColor: colors.secondary }]}
+              style={[styles.statCard, { backgroundColor: '#252525' }]}
             >
               <IconSymbol name={stat.icon as any} size={24} color={stat.color} />
               <ThemedText style={styles.statValue}>{stat.value}</ThemedText>
               <ThemedText style={styles.statTitle}>{stat.title}</ThemedText>
-            </BlurView>
+            </View>
           ))}
         </View>
+
         <WorkoutCalendar
           sessions={{
             '2021-09-01': { type: 'full-body', completed: true },
@@ -106,12 +111,10 @@ export default function DashboardScreen() {
             <TouchableOpacity
               key={program.id}
               style={styles.programCard}
-              //onPress={() => router.push(`/program/${program.id}`)}
+              onPress={() => router.push(`/program/${program.id}`)}
             >
-              <BlurView
-                intensity={80}
-                tint={colorScheme === 'dark' ? 'dark' : 'light'}
-                style={[styles.programCardContent, { backgroundColor: colors.secondary }]}
+              <View
+                style={[styles.programCardContent, { backgroundColor: '#252525' }]}
               >
                 <IconSymbol name={program.icon as any} size={40} color={colors.primary} />
                 <ThemedText style={styles.programName}>{program.name}</ThemedText>
@@ -120,7 +123,7 @@ export default function DashboardScreen() {
                   <View style={[styles.dot, { backgroundColor: colors.primary }]} />
                   <ThemedText style={styles.programInfo}>{program.difficulty}</ThemedText>
                 </View>
-              </BlurView>
+              </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -143,21 +146,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  logo: {
+    alignItems: 'flex-end',
+    marginBottom: 20,
+  },
+  logoImage: {
+    width: 100,
+    height: 30,
+  },
   content: {
-    flex: 1,
     padding: 20,
     paddingTop: Platform.select({ ios: 60, android: 40 }),
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 30,
   },
-  welcomeText: {
-    fontSize: 16,
-    opacity: 0.7,
+  profileImage: {
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+    marginRight: 16,
+    borderWidth: 3,
+    borderColor: '#0367FC',
   },
-  nameText: {
+  welcomeText: {
     fontSize: 28,
     fontWeight: 'bold',
+    paddingTop: 10,
+  },
+  nameText: {
+    fontSize: 16,
+    opacity: 0.7,
   },
   statsContainer: {
     flexDirection: 'row',

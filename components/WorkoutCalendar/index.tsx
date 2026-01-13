@@ -4,6 +4,7 @@ import { BlurView } from 'expo-blur';
 import { ThemedText } from '@/components/ThemedText';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 
 type WorkoutSession = {
   type: string;
@@ -11,13 +12,14 @@ type WorkoutSession = {
 };
 
 type WorkoutCalendarProps = {
-  sessions: Record<string, WorkoutSession>;
-  onDayPress?: (date: string, session?: WorkoutSession) => void;
+  sessions: { [key: string]: WorkoutSession };
+  onDayPress: (date: string) => void;
 };
 
 export function WorkoutCalendar({ sessions, onDayPress }: WorkoutCalendarProps) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
 
   const getDaysInMonth = () => {
     const year = selectedDate.getFullYear();
@@ -55,13 +57,13 @@ export function WorkoutCalendar({ sessions, onDayPress }: WorkoutCalendarProps) 
     >
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigateMonth('prev')}>
-          <IconSymbol name="chevron.left" size={24} color="#007AFF" />
+          <IconSymbol name="chevron.left" size={24} color={colors.primary} />
         </TouchableOpacity>
         <ThemedText style={styles.title}>
           {selectedDate.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
         </ThemedText>
         <TouchableOpacity onPress={() => navigateMonth('next')}>
-          <IconSymbol name="chevron.right" size={24} color="#007AFF" />
+          <IconSymbol name="chevron.right" size={24} color={colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -85,13 +87,13 @@ export function WorkoutCalendar({ sessions, onDayPress }: WorkoutCalendarProps) 
                 session?.completed && styles.completed,
                 session && !session.completed && styles.planned,
               ]}
-              onPress={() => onDayPress?.(dateString, session)}
+              onPress={() => onDayPress(dateString)}
             >
               <ThemedText style={styles.dayNumber}>{date.getDate()}</ThemedText>
               {session && (
                 <View style={[
                   styles.indicator,
-                  { backgroundColor: session.completed ? '#34C759' : '#007AFF' }
+                  { backgroundColor: session.completed ? colors.primary : colors.accent }
                 ]} />
               )}
             </TouchableOpacity>
@@ -118,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textTransform: 'capitalize',
+    color: '#FFFFFF',
   },
   grid: {
     flexDirection: 'row',
@@ -130,6 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     opacity: 0.7,
     marginBottom: 10,
+    color: '#FFFFFF',
   },
   day: {
     width: '14.28%',
@@ -144,12 +148,13 @@ const styles = StyleSheet.create({
   },
   dayNumber: {
     fontSize: 14,
+    color: '#FFFFFF',
   },
   completed: {
-    backgroundColor: 'rgba(52, 199, 89, 0.1)',
+    backgroundColor: 'rgba(36, 62, 244, 0.2)',
   },
   planned: {
-    backgroundColor: 'rgba(0, 122, 255, 0.1)',
+    backgroundColor: 'rgba(221, 235, 89, 0.2)',
   },
   indicator: {
     width: 6,
